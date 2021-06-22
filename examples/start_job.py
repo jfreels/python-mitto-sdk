@@ -7,7 +7,8 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
-JOB_ID = 65
+JOB_ID_STR = input("Input number of job that you want to start: ")
+JOB_ID = int(JOB_ID_STR)
 
 def main():
     """start job"""

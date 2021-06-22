@@ -9,12 +9,14 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-JOB_ID = 26402
+JOB_ID_STR = input("Input id of job that you want to update: ")
+JOB_ID = int(JOB_ID_STR) 
 
-# the existing job conf has "sql": "select 1"
+sql_command = input("Input sql command that you want to input into configuration:\n ")
+
 JOB_CONF = {
     "dbo": "postgresql://localhost/analytics",
-    "sql": "select 4;",
+    "sql": sql_command,
     "parameters": {},
     "kwargs": {},
     "transaction": True,

@@ -9,9 +9,11 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
+name = input("Input the name of creating job: ")
+
 JOB = {
-    "name": "sql_select_1_from_api",
-    "title": "[SQL] Select 1 from API",
+    "name": name,
+    "title": f"[SQL]{name}",
     "type": "sql",
     "tags": [
         "sql"

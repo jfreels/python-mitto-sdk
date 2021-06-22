@@ -1,6 +1,5 @@
 import requests
 from addict import Dict
-
 from src.mitto_sdk import Mitto
 
 
@@ -23,7 +22,7 @@ def test_base_url_ends_with_slash(mocker):
 
 
 ABOUT_RESPONSE = Dict()
-ABOUT_RESPONSE.version = "2.8.8"
+ABOUT_RESPONSE.version = "2.9.3"
 ABOUT_RESPONSE.system.fqdn = "fake.zuarbase.net"
 
 
@@ -34,6 +33,7 @@ def test_get_about(mocker):
             "json": lambda: ABOUT_RESPONSE,
             "raise_for_status": lambda: None
         })
+
     mocker.patch("requests.Session.get", new=_request_get)
     mitto = Mitto(
         base_url="https://fake.zuarbase.net",
@@ -57,6 +57,7 @@ def test_get_job(mocker):
             "json": lambda: GET_JOB_RESPONSE,
             "raise_for_status": lambda: None
         })
+
     mocker.patch("requests.Session.get", new=_request_get)
     mitto = Mitto(
         base_url="https://fake.zuarbase.net",
@@ -82,6 +83,7 @@ def test_get_job_schedule(mocker):
             "json": lambda: GET_JOB_SCHEDULE_RESPONSE,
             "raise_for_status": lambda: None
         })
+
     mocker.patch("requests.Session.get", new=_request_get)
     mitto = Mitto(
         base_url="https://fake.zuarbase.net",
@@ -97,6 +99,7 @@ def test_update_schedule(mocker):
             "json": lambda: GET_JOB_RESPONSE,
             "raise_for_status": lambda: None
         })
+
     mocker.patch("requests.Session.post", new=_request_post)
     mitto = Mitto(
         base_url="https://fake.zuarbase.net",
@@ -121,6 +124,7 @@ def test_update_job_conf(mocker):
             "json": lambda: GET_JOB_RESPONSE,
             "raise_for_status": lambda: None
         })
+
     mocker.patch("requests.Session.post", new=_request_post)
     mitto = Mitto(
         base_url="https://fake.zuarbase.net",
@@ -143,6 +147,7 @@ def test_create_job(mocker):
             "json": lambda: GET_JOB_RESPONSE,
             "raise_for_status": lambda: None
         })
+
     mocker.patch("requests.Session.post", new=_request_post)
     mitto = Mitto(
         base_url="https://fake.zuarbase.net",
@@ -167,6 +172,37 @@ def test_create_job(mocker):
     assert mitto.create_job(job=job) == GET_JOB_RESPONSE
 
 
+GET_CMD_JOB_RESPONSE = Dict()
+GET_CMD_JOB_RESPONSE.id = 2
+GET_CMD_JOB_RESPONSE.name = "cmd_job"
+GET_CMD_JOB_RESPONSE.title = "cmd job"
+GET_CMD_JOB_RESPONSE.type = "cmd"
+GET_CMD_JOB_RESPONSE.tags = "cmd"
+
+def test_create_cmd_job(mocker):
+    def _request_post(*args, params=None, **kwargs):
+        return Dict({
+            "status_code": 200,
+            "json": lambda: GET_CMD_JOB_RESPONSE,
+            "raise_for_status": None
+        })
+
+    mocker.patch("requests.Session.post", new=_request_post)
+    mitto = Mitto(
+        base_url="https://fake.zuarbase.net",
+        api_key="FAKE_API_KEY"
+    )
+    cmd_job = {
+        "name": "sql_select_1_from_api",
+        "title": "[CMD] echo env",
+        "type": "cmd",
+        "tags": [
+            "cmd"
+        ]
+    }
+    assert (mitto.create_job(job=cmd_job)) == GET_CMD_JOB_RESPONSE
+
+
 ACTION_RESPONSE = Dict()
 ACTION_RESPONSE.id = 68848
 ACTION_RESPONSE.returncode = None
@@ -180,6 +216,7 @@ def test_job_action(mocker):
             "json": lambda: ACTION_RESPONSE,
             "raise_for_status": lambda: None
         })
+
     mocker.patch("requests.Session.post", new=_request_post)
     mitto = Mitto(
         base_url="https://fake.zuarbase.net",
@@ -204,6 +241,7 @@ def test_create_job_webhook(mocker):
             "json": lambda: WEBHOOK_RESPONSE,
             "raise_for_status": lambda: None
         })
+
     mocker.patch("requests.Session.post", new=_request_post)
     mitto = Mitto(
         base_url="https://fake.zuarbase.net",
@@ -235,15 +273,61 @@ GET_JOBS_RESPONSE.pagination = {
 
 
 def test_get_jobs(mocker):
-    def _request_get(*args, params=None, **kwargs):
+    def _request_post(*args, params=None, **kwargs):
         return Dict({
             "status_code": 200,
             "json": lambda: GET_JOBS_RESPONSE,
             "raise_for_status": lambda: None
         })
-    mocker.patch("requests.Session.get", new=_request_get)
+
+    mocker.patch("requests.Session.post", new=_request_post)
     mitto = Mitto(
         base_url="https://fake.zuarbase.net",
         api_key="FAKE_API_KEY"
     )
     assert list(mitto.get_jobs()) == GET_JOBS_RESPONSE["jobs"]
+
+
+def test_start_job(mocker):
+    def _request_post(*args, params=None, **kwargs):
+        return Dict({
+            "status_code": 200,
+            "json": lambda: ACTION_RESPONSE,
+            "raise_for_status": lambda: None
+        })
+
+    mocker.patch("requests.Session.post", new=_request_post)
+    mitto = Mitto(
+        base_url="https://fake.zuarbase.net",
+        api_key="FAKE_API_KEY"
+    )
+    assert mitto.start_job(3) == ACTION_RESPONSE
+
+
+GET_JOB_RESPONSE.conf = {
+    'dbo': "fakesql"
+}
+
+
+def test_migrate_to_new_db(mocker):
+    def _request_post(*args, params=None, **kwargs):
+        return Dict({
+            "starus_code": 200,
+            "json": lambda: GET_JOB_RESPONSE.conf,
+            "raise_for_status": lambda: None
+        })
+
+    mocker.patch("requests.Session.post", new=_request_post)
+    mitto = Mitto(
+        base_url="https://fake.zuarbase.net",
+        api_key="FAKE_API_KEY"
+    )
+    new_conf = Dict()
+    new_conf.id = 1
+    new_conf.name = "fake_job"
+    new_conf.title = "fake job"
+    new_conf.dbo = "fakesql"
+    assert mitto.update_job_conf(
+        job_id=2,
+        job_conf=new_conf
+    ) == GET_JOB_RESPONSE.conf

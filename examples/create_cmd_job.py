@@ -8,21 +8,16 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
+name = input("Input name for the cmd job: ")
 
 JOB = {
-    "name": "cmd_echo_env",
+    "name": name,
     "title": "[CMD] echo env",
     "type": "cmd",
     "tags": [
         "cmd"
-    ],
-    "conf": {
-        "cmd": "env > /var/mitto/data/env.txt",
-        "cmd_env": {},
-        "exec": False,
-        "shell": True
-    }
-}
+            ],
+      }
 
 
 def main():

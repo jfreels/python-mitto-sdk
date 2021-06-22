@@ -29,10 +29,9 @@ def main():
         job_id = job["id"]
         job_conf = mitto.get_job(job_id=job_id)
         conf = job_conf["conf"]
-        if "input" in conf and "dbo" in conf["input"]:
-            if INPUT_DBO_LIKE in conf["input"]["dbo"]:
-                conf["input"]["dbo"] = NEW_DBO
-                print(f"Updating job conf: {job_id}, {job['title']}")
-                mitto.update_job_conf(job_id=job_id, job_conf=conf)
+        if INPUT_DBO_LIKE in conf:
+          NEW_DBO = f"conf['dbo']"
+          print(f"Updating job conf: {job_id}, {job['title']}")
+          mitto.update_job_conf(job_id=job_id, job_conf=conf)
 if __name__ == "__main__":
     sys.exit(main())

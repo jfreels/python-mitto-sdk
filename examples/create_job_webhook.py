@@ -9,7 +9,8 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-JOB_ID = 26433
+JOB_ID_STR = input("Input id of job that you want to create webhook: ")
+JOB_ID = int(JOB_ID_STR)
 
 WEBHOOK = {
     "url": "https://webhook.site/83d6607a-0118-478d-a68c-cf2ab4645314",

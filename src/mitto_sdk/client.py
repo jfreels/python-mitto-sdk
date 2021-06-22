@@ -10,6 +10,7 @@ class Mitto:
     def __init__(self, base_url, api_key, verify=True):
         if base_url.endswith("/"):
             self.base_url = base_url[:-1]
+
         else:
             self.base_url = base_url
         self.api_key = api_key
@@ -32,7 +33,7 @@ class Mitto:
         more_pages = True
 
         while more_pages:
-            response = self.session.get(url=url, params=params)
+            response = self.session.post(url=url, params=params)
             response.raise_for_status()
             data = response.json()
             pagination = data.get("pagination")
@@ -47,19 +48,23 @@ class Mitto:
         search=None,
         tag=None,
         job_type=None,
+        start=None,
+        end=None,
         status=None,
         **kwargs
     ):
         """
         Get jobs from Mitto API. Filter using search, tag, type, and/or status.
         """
-        uri = "/v2/jobs"
+        uri = "/v2/jobs/search"
         url = f"{self.base_url}{self.api_root}{uri}"
 
         params = {
             "search": search,
             "tag": tag,
             "type": job_type,
+            "start": start,
+            "end": end,
             "status": status
         }
 
@@ -100,7 +105,7 @@ class Mitto:
         """
         Get system information from Mitto API.
         """
-        uri = "/about"
+        uri = "/v2/about"
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.get(url)
@@ -116,7 +121,6 @@ class Mitto:
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.post(url=url, json=job, **kwargs)
-        results.raise_for_status()
         return results.json()
 
     def update_job_conf(self, job_id=None, job_conf=None, **kwargs):
@@ -126,7 +130,7 @@ class Mitto:
         assert isinstance(job_conf, dict)
         assert isinstance(job_id, int)
 
-        uri = f"/job/{job_id}/conf"
+        uri = f"/v2/jobs/{job_id}/conf"
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.post(url=url, json=job_conf, **kwargs)
@@ -140,7 +144,7 @@ class Mitto:
 
         assert isinstance(job_id, int)
 
-        uri = f"/job/{job_id}/schedule"
+        uri = f"/v2/jobs/search/{job_id}/schedule"
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.get(url=url, **kwargs)
@@ -154,7 +158,7 @@ class Mitto:
         assert isinstance(job_id, int)
         assert isinstance(job_schedule, dict)
 
-        uri = f"/job/{job_id}/schedule"
+        uri = f"/v2/jobs/{job_id}/schedule"
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.post(url=url, json=job_schedule, **kwargs)

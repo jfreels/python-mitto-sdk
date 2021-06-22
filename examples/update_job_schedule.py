@@ -9,7 +9,8 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-JOB_ID = 26439
+JOB = input("Input job id that you want to update schedule: ")
+JOB_ID = int(JOB) 
 
 SCHEDULE = {
     "value": "continuous",
@@ -25,7 +26,8 @@ def main():
         base_url=BASE_URL,
         api_key=API_KEY
     )
-    job_schedule = mitto.update_job_schedule(job_id=JOB_ID, job_schedule=SCHEDULE)
+    job_s = mitto.update_job_schedule(job_id=JOB_ID, job_schedule=SCHEDULE)
+    job_schedule = job_s['schedule']
     print(job_schedule)
 
 
