@@ -13,7 +13,8 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-JOB_TYPE = "io"
+
+JOB_TYPE = input("Input type of job that you want to migrate: ")
 INPUT_DBO_LIKE = "postgresql"
 NEW_DBO = "mysql+pymysql://<user>:<password>@<hostname>.us-east-1.rds.amazonaws.com:3306/<dbname>"
 

@@ -1,5 +1,6 @@
 import os
 import sys
+import requests
 
 from dotenv import load_dotenv
 from mitto_sdk import Mitto
@@ -29,9 +30,12 @@ def main():
         base_url=BASE_URL,
         api_key=API_KEY
     )
-
-    updated_job = mitto.update_job_conf(job_id=JOB_ID, job_conf=JOB_CONF)
-    print(updated_job)
+    job = mitto.get_job(job_id=JOB_ID)
+    conf = job["conf"]
+    conf = JOB_CONF
+    job["conf"] = conf
+    res = requests.patch(url=f"{BASE_URL}/api/v2/jobs/{JOB_ID}?API_KEY={API_KEY}", json = job)
+    print(f"Updating job dbo conf: {JOB_ID}, {conf}")
 
 
 if __name__ == "__main__":

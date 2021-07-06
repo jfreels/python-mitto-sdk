@@ -9,19 +9,23 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-name = input("Input a name of creating job(one word): ")
-title = input("Input a title of creating job(one word): ")
-type = input(" Input a type of creating job(one word): ")
-tags = input("Input a tags of creating job(one word): ")
+name = input("Input the name of SQL job(one word): ")
 
 JOB = {
     "name": name,
-    "title": title,
-    "type": type,
+    "title": f"[SQL]{name}",
+    "type": "sql",
     "tags": [
-        tags
+        "sql"
     ],
-    "conf": {}
+    "conf": {
+        "dbo": "postgresql://localhost/analytics",
+        "sql": "select 1;",
+        "parameters": {},
+        "kwargs": {},
+        "transaction": True,
+        "split": False
+    }
 }
 
 

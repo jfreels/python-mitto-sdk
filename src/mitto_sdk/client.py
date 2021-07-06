@@ -1,6 +1,7 @@
 """Connect to mitto API and call endpoints"""
 
 import requests
+import hjson
 
 
 class Mitto:
@@ -80,7 +81,22 @@ class Mitto:
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.get(url)
+        results.raise_for_status()
         return results.json()
+
+    def update_job_conf_dbo(self, job_id=None, job_conf=None):
+        """
+        Get job from Mitto API. Pass in a valid job id.
+        """
+        uri = f"/v2/jobs/{job_id}"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url)
+        job = results.json()
+        conf = job["conf"]
+        conf = [hjson.loads(line) for line in conf]
+        job["conf"] = conf
+        return job
 
     def job_action(self, job_id, action):
         """
@@ -110,6 +126,16 @@ class Mitto:
 
         results = self.session.get(url)
         return results.json()
+
+    def delete_job(self, job_id):
+        """
+        Delete job from Mitto. Pass in a valid job id.
+        """
+        uri = f"/v2/jobs/{job_id}"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.delete(url)
+        return results
 
     def create_job(self, job, **kwargs):
         """
@@ -178,3 +204,137 @@ class Mitto:
         results = self.session.post(url=url, json=job_hook, **kwargs)
         results.raise_for_status()
         return results.json()
+
+    def get_job_webhooks(self, job_id=None, **kwargs):
+        """
+        Get info about single job current webhook, if it exists.
+        """
+        assert isinstance(job_id, int)
+
+        uri = f"/v2/jobs/{job_id}/webhooks"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url=url, **kwargs)
+        results.raise_for_status()
+        return results.json()
+
+    def get_tags(self, tags_id=None, **kwargs):
+        """
+        Get info about tags of job, if it exists.
+        """
+        assert isinstance(tags_id, int)
+
+        uri = f"/tags/{tags_id}"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url=url, **kwargs)
+        results.raise_for_status()
+        return results.json()
+
+    def delete_webhook(self, webhook_id=None):
+        """
+        Delete webhook from Mitto job. Pass in a valid webhook id.
+        """
+        uri = f"/webhooks/{webhook_id}"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.delete(url)
+        return results
+
+    def get_about_messages(self, **kwargs):
+        """
+        Get about messages.
+        """
+
+        uri = "/v2/about/messages"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url, **kwargs)
+        results.raise_for_status()
+        return results.json()
+
+    def get_webhooks(self, **kwargs):
+        """
+        Get all webhooks.
+        """
+
+        uri = "/webhooks"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url, **kwargs)
+        results.raise_for_status()
+        return results.json()
+
+    def get_metrics(self, **kwargs):
+        """
+        Get metrics.
+        """
+
+        uri = "/v2/metrics"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url, **kwargs)
+        results.raise_for_status()
+        return results.json()
+
+    def get_pkg(self, **kwargs):
+        """
+        Get the list of Mitto packages.
+        """
+        uri = "/v2/pkg"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url, **kwargs)
+        results.raise_for_status()
+        return results.json()
+
+    def update_pkg(self, **kwargs):
+        """
+        Update the packages state.
+        """
+
+        uri = "/v2/pkg/refresh"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.post(url, **kwargs)
+        results.raise_for_status()
+        return results.json()
+
+    def get_single_job_status(self, job_id, **kwargs):
+        """
+        Retieve status of single job.
+        """
+
+        uri = f"/v2/jobs/{job_id}/status"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url, **kwargs)
+        results.raise_for_status()
+        return results.json()
+
+    def get_bulk_jobs(self, name=None, **kwargs):
+        """
+        Get Jobs or Sequences by name. Pass a valid name of job
+        """
+
+        uri = f"/v2/bulk/jobs?name={name}&"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url, **kwargs)
+        results.raise_for_status()
+        return results.json()
+
+    def create_bulk_jobs(self, bulk_job=None, **kwargs):
+        """
+        Create a new Mitto job.
+        """
+        assert isinstance(bulk_job, dict)
+
+        uri = "/v2/bulk/jobs"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.post(url=url, json=bulk_job, **kwargs)
+        return results.json()
+
+
+
