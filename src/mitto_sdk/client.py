@@ -5,6 +5,7 @@ import hjson
 
 
 class Mitto:
+    # pylint: disable=R0904
     """
     Mitto instance
     """
@@ -54,6 +55,7 @@ class Mitto:
         status=None,
         **kwargs
     ):
+        # pylint: disable=R0913
         """
         Get jobs from Mitto API. Filter using search, tag, type, and/or status.
         """
@@ -82,20 +84,12 @@ class Mitto:
 
         results = self.session.get(url)
         results.raise_for_status()
-        return results.json()
 
-    def update_job_conf_dbo(self, job_id=None, job_conf=None):
-        """
-        Get job from Mitto API. Pass in a valid job id.
-        """
-        uri = f"/v2/jobs/{job_id}"
-        url = f"{self.base_url}{self.api_root}{uri}"
-
-        results = self.session.get(url)
         job = results.json()
-        conf = job["conf"]
-        conf = [hjson.loads(line) for line in conf]
-        job["conf"] = conf
+        if job.get("conf"):
+            conf = job["conf"]
+            job["conf"] = hjson.loads(conf)
+
         return job
 
     def job_action(self, job_id, action):
@@ -149,26 +143,10 @@ class Mitto:
         results = self.session.post(url=url, json=job, **kwargs)
         return results.json()
 
-    def update_job_conf(self, job_id=None, job_conf=None, **kwargs):
-        """
-        Update an existing Mitto job.
-        """
-        assert isinstance(job_conf, dict)
-        assert isinstance(job_id, int)
-
-        uri = f"/v2/jobs/{job_id}/conf"
-        url = f"{self.base_url}{self.api_root}{uri}"
-
-        results = self.session.post(url=url, json=job_conf, **kwargs)
-        results.raise_for_status()
-        return results.json()
-
     def get_job_schedule(self, job_id=None, **kwargs):
         """
         Get a job's schedule. Pass in a valid job id.
         """
-
-        assert isinstance(job_id, int)
 
         uri = f"/v2/jobs/search/{job_id}/schedule"
         url = f"{self.base_url}{self.api_root}{uri}"
@@ -189,6 +167,34 @@ class Mitto:
 
         results = self.session.post(url=url, json=job_schedule, **kwargs)
         results.raise_for_status()
+        return results.json()
+
+    def update_job(self, job_id, update_job_body, **kwargs):
+        """
+        Update an existing Mitto job
+        """
+        assert isinstance(job_id, int)
+        assert isinstance(update_job_body, dict)
+
+        uri = f"/v2/jobs/{job_id}"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.patch(url, json=update_job_body, **kwargs)
+        # results.raise_for_status()
+        return results.json()
+
+    def update_job_conf(self, job_id, job_conf, **kwargs):
+        """
+        Update an existing Mitto job conf.
+        """
+        assert isinstance(job_conf, dict)
+        assert isinstance(job_id, int)
+
+        uri = f"/v2/jobs/{job_id}"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.patch(url, json=job_conf, **kwargs)
+        # results.raise_for_status()
         return results.json()
 
     def create_job_webhook(self, job_id=None, job_hook=None, **kwargs):
@@ -336,5 +342,48 @@ class Mitto:
         results = self.session.post(url=url, json=bulk_job, **kwargs)
         return results.json()
 
+    def create_tags(self, tags, **kwargs):
+        """
+        Create a new tag in Mitto.
+        """
+        assert isinstance(tags, dict)
 
+        uri = "/tags"
+        url = f"{self.base_url}{self.api_root}{uri}"
 
+        results = self.session.post(url, json=tags, **kwargs)
+        return results.json()
+
+    def get_credentials(self, **kwargs):
+        """
+        Return all credentials.
+        """
+        uri = "/credentials"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url, **kwargs)
+        return results.json()
+
+    def create_credentials(self, creds, **kwargs):
+        """
+        Create a new credentials in Mitto instance.
+        """
+        assert isinstance(creds, dict)
+
+        uri = "/credentials"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.post(url, json=creds, **kwargs)
+        return results.json()
+
+    def get_databases(self):
+        """
+        Get all databases.
+        """
+
+        uri = "/v2/databases"
+        url = f"{self.base_url}{self.api_root}{uri}"
+
+        results = self.session.get(url)
+        results.raise_for_status()
+        return results.json()

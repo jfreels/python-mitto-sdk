@@ -9,10 +9,10 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-name = input("Input a name of creating job(one word): ")
-title = input("Input a title of creating job(one word): ")
-type = input(" Input a type of creating job(one word): ")
-tags = input("Input a tags of creating job(one word): ")
+name = "Newjob"
+title = "io"
+type = "io"
+tags = "io"
 
 JOB = {
     "name": name,

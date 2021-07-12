@@ -8,7 +8,7 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
-name = input("Input name for the cmd job: ")
+name = "CMDjob"
 
 JOB = {
     "name": name,

@@ -14,9 +14,10 @@ BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
 
-JOB_TYPE = input("Input type of job that you want to migrate: ")
+JOB_TYPE = "io"
 INPUT_DBO_LIKE = "postgresql"
-NEW_DBO = "mysql+pymysql://<user>:<password>@<hostname>.us-east-1.rds.amazonaws.com:3306/<dbname>"
+NEW_DBO = "'mysql+pymysql://<user>:<password>@<hostname>',\
+'.us-east-1.rds.amazonaws.com:3306/<dbname>'"
 
 
 def main():
@@ -31,8 +32,10 @@ def main():
         job_conf = mitto.get_job(job_id=job_id)
         conf = job_conf["conf"]
         if INPUT_DBO_LIKE in conf:
-          NEW_DBO = f"conf['dbo']"
-          print(f"Updating job conf: {job_id}, {job['title']}")
-          mitto.update_job_conf(job_id=job_id, job_conf=conf)
+            conf['dbo'] = NEW_DBO
+            print(f"Updating job conf: {job_id}, {job['title']}")
+            mitto.update_job_conf(job_id=job_id, job_conf=conf)
+
+
 if __name__ == "__main__":
     sys.exit(main())

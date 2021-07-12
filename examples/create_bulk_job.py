@@ -9,10 +9,10 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-name = input("Input a name of creating bulk job(one word): ")
-title = input("Input a title of creating bulk job(one word): ")
-typel = input("Input a type of creating bulk job(one word): ")
-tags = input(" Input a tags of creating bulk job(one word): ")
+name = "name"
+title = "io"
+typel = "io"
+tags = "io"
 
 BULK_JOB = [{
     "name": name,

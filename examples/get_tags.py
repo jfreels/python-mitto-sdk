@@ -8,15 +8,15 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
-tags_id_str = input("Input tag_id of job that you want to get tags: ")
-tags_id = int(tags_id_str)
+TAGS_ID = 1
+
 
 def main():
     mitto = Mitto(
         base_url=BASE_URL,
         api_key=API_KEY
     )
-    tags = mitto.get_tags(tags_id=tags_id)
+    tags = mitto.get_tags(tags_id=TAGS_ID)
     print(tags)
 
 

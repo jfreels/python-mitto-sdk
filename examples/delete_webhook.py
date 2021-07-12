@@ -8,8 +8,7 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
-WEBHOOK_ID_STR = input("Input id of webhook that you want to delete: ")
-WEBHOOK_ID = int(WEBHOOK_ID_STR)
+WEBHOOK_ID = 1
 
 
 def main():
@@ -19,7 +18,8 @@ def main():
     )
 
     webhooks = mitto.delete_webhook(webhook_id=WEBHOOK_ID)
-    print(f"{webhooks}\n If you see '<Response [204]>' message, webhook {WEBHOOK_ID} succesfuly deleted")
+    print(f'{webhooks}\n If you see Response[204]',
+          f'message webhook {WEBHOOK_ID} succesfuly deleted')
 
 
 if __name__ == "__main__":

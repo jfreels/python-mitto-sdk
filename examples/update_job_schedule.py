@@ -9,8 +9,7 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-JOB = input("Input job id that you want to update schedule: ")
-JOB_ID = int(JOB) 
+JOB_ID = 46
 
 SCHEDULE = {
     "value": "continuous",

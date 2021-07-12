@@ -8,8 +8,9 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-JOB_TYPE = input(" Input type of job that you want to get configuration: ")
+JOB_TYPE = "io"
 INPUT_DBO_LIKE = "postgresql"
+
 
 def main():
     """show matching jobs"""
@@ -23,7 +24,8 @@ def main():
         job_id = job['id']
         job_conf = mitto.get_job(job_id=job_id)
         conf = job_conf['conf']
-        print(f"JOB ID: {job_id} - JOB TITLE: {job['title']}")
+        print(f"JOB ID: {job_id} - JOB CONF: {conf}")
+
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -1,6 +1,5 @@
 import os
 import sys
-import requests
 
 from dotenv import load_dotenv
 from mitto_sdk import Mitto
@@ -22,4 +21,3 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
-

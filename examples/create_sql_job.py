@@ -9,7 +9,7 @@ load_dotenv()
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
-name = input("Input the name of SQL job(one word): ")
+name = "Newsql"
 
 JOB = {
     "name": name,

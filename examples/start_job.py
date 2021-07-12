@@ -7,8 +7,8 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
-JOB_ID_STR = input("Input number of job that you want to start: ")
-JOB_ID = int(JOB_ID_STR)
+JOB_ID = 46
+
 
 def main():
     """start job"""
@@ -18,6 +18,7 @@ def main():
     )
     response = mitto.start_job(JOB_ID)
     print(response)
+
 
 if __name__ == "__main__":
     sys.exit(main())

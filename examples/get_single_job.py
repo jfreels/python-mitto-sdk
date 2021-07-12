@@ -8,15 +8,16 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
-job_id = input(" Input a number of existing job that you want to get: ")
+JOB_ID = 49
+
 
 def main():
     mitto = Mitto(
         base_url=BASE_URL,
         api_key=API_KEY
     )
-    job = mitto.get_job(job_id=job_id)
-    print(job["id"], job["name"])
+    job = mitto.get_job(job_id=JOB_ID)
+    print(job)
 
 
 if __name__ == "__main__":

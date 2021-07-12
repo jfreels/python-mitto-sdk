@@ -40,6 +40,7 @@ version:
 
 flake8:
 	flake8 $(PACKAGE) tests
+	flake8 $(PACKAGE) examples
 .PHONY: flake8
 
 pylint: pylint_pkg pylint_tests
@@ -52,6 +53,11 @@ pylint_pkg:
 pylint_tests:
 	pylint tests --disable=missing-docstring,duplicate-code,unused-argument
 .PHONY: pylint_test
+
+pylint_tests_examples:
+	pylint examples --disable=missing-docstring,duplicate-code,unused-argument
+.PHONY: pylint_examples
+
 
 test:
 	pytest -xv tests

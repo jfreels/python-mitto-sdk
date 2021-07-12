@@ -16,8 +16,7 @@ def main():
         api_key=API_KEY
     )
     pkg = mitto.get_pkg()
-    for packages in pkg:
-      print(pkg["packages"])
+    print(pkg["packages"])
 
 
 if __name__ == "__main__":

@@ -8,7 +8,10 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
-JOB_ID = 29
+
+TAGS = {
+    "name": "diffpiff"
+}
 
 
 def main():
@@ -17,9 +20,8 @@ def main():
         api_key=API_KEY
     )
 
-    jobs = mitto.delete_job(job_id=JOB_ID)
-    print(f'{jobs}\n If you see <Response [204]> message',
-          f'job {JOB_ID} succesfuly deleted')
+    create_tag = mitto.create_tags(tags=TAGS)
+    print(f"{create_tag} is succesfully created")
 
 
 if __name__ == "__main__":
