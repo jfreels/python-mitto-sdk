@@ -1,5 +1,6 @@
 # include .env variables
 PACKAGE := src
+EXAMPLES := examples
 include .env
 export
 
@@ -39,22 +40,25 @@ version:
 .PHONY: version_patch
 
 flake8:
-	flake8 $(PACKAGE) tests
-	flake8 $(PACKAGE) examples
+	flake8 $(PACKAGE) $(EXAMPLES) tests
 .PHONY: flake8
 
-pylint: pylint_pkg pylint_tests
+pylint: pylint_pkg pylint_examp pylint_tests pylint_examples
 .PHONY: pylint
 
 pylint_pkg:
 	pylint $(PACKAGE)
 .PHONY: pylint_pkg
 
+pylint_examp:
+	pylint $(EXAMPLES)
+.PHONY: pylint_examp
+
 pylint_tests:
 	pylint tests --disable=missing-docstring,duplicate-code,unused-argument
 .PHONY: pylint_test
 
-pylint_tests_examples:
+pylint_examples:
 	pylint examples --disable=missing-docstring,duplicate-code,unused-argument
 .PHONY: pylint_examples
 
@@ -65,6 +69,7 @@ test:
 
 coverage:
 	pytest --cov=$(PACKAGE) --cov-report=term-missing --cov-fail-under=100 tests
+	pytest --cov=$(EXAMPLES) --cov-report=term-missing --cov-fail-under=100 tests
 .PHONY: coverage
 
 freeze:

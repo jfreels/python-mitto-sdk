@@ -136,7 +136,7 @@ def test_update_schedule(mocker):
     ) == GET_JOB_RESPONSE
 
 
-UPDATE_JOB_RESPONSE = {
+UPDATE_JOB = {
     "title": "sql",
     "type": "sql",
     "markdown": "string",
@@ -170,7 +170,7 @@ def test_update_job(mocker):
     def _request_patch(*args, params=None, **kwargs):
         return Dict({
             "status_code": 200,
-            "json": lambda: UPDATE_JOB_RESPONSE,
+            "json": lambda: UPDATE_JOB,
             "raise_for_status": lambda: None
         })
 
@@ -179,8 +179,7 @@ def test_update_job(mocker):
         base_url="https:fake.zuarbase.net",
         api_key="FAKE_API_KEY"
     )
-    assert mitto.update_job(job_id=52, update_job_body=UPDATE_JOB_RESPONSE)
-    print(f"Updating job: {UPDATE_JOB_RESPONSE}")
+    assert mitto.update_job(job_id=342, update_job_body=UPDATE_JOB) == UPDATE_JOB
 
 
 def test_update_job_conf(mocker):

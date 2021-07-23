@@ -1,27 +1,37 @@
+"""
+Getting existing single job webhook configuration info in Mitto instance.
+"""
 import os
 import sys
 
 from dotenv import load_dotenv
+from create_job_webhook import main as created_job_webhook
 from mitto_sdk import Mitto
 
 load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
+WEBHOOK = {
+    "url": "https://webhook.site/83d6607a-0118-478d-a68c-cf2ab4645314",
+    "method": "POST",
+    "event_type": "JOB_COMPLETE",
+    "content_type": "application/json",
+    "body": '{ "text": "hello world" }',
+    "enabled": True
+}
 
-JOB_ID = 46
 
-
-def main():
+def main(BASE_URL, API_KEY):
+    """getting webhook configuration info"""
     mitto = Mitto(
         base_url=BASE_URL,
         api_key=API_KEY
     )
-    webhook = mitto.get_job_webhooks(job_id=JOB_ID)
-    job_conf = mitto.get_job(job_id=JOB_ID)
-    conf = job_conf['conf']
-    print(f"Job_webhook: {webhook}\n Job_conf: {conf}")
+    job_id = created_job_webhook(WEBHOOK=WEBHOOK)
+    webhook = mitto.get_job_webhooks(job_id=job_id)
+    print(f"Job webhook conf:\n{webhook}")
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(BASE_URL, API_KEY))

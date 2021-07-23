@@ -1,3 +1,6 @@
+"""
+Getting info about databases in Mitto instance.
+"""
 import os
 import sys
 
@@ -10,14 +13,16 @@ BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
 
-def main():
+def main(BASE_URL, API_KEY):
+    """getting databases"""
     mitto = Mitto(
         base_url=BASE_URL,
         api_key=API_KEY
     )
     get_databases = mitto.get_databases()
-    print(get_databases)
+    print(f"Printing results of getting databases\
+ from Mitto instance:\n{get_databases}")
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(BASE_URL, API_KEY))

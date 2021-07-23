@@ -96,8 +96,8 @@ class Mitto:
         """
         Run action on job
         """
-        uri = "/v2/jobs"
-        url = f"{self.base_url}{self.api_root}{uri}/{job_id}/:actions"
+        uri = f"/v2/jobs/{job_id}/:actions"
+        url = f"{self.base_url}{self.api_root}{uri}"
         post_data = {
             "action": action.upper()
         }
@@ -119,6 +119,7 @@ class Mitto:
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.get(url)
+        results.raise_for_status()
         return results.json()
 
     def delete_job(self, job_id):
@@ -141,6 +142,7 @@ class Mitto:
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.post(url=url, json=job, **kwargs)
+#        results.raise_for_status()
         return results.json()
 
     def get_job_schedule(self, job_id=None, **kwargs):
@@ -148,12 +150,13 @@ class Mitto:
         Get a job's schedule. Pass in a valid job id.
         """
 
-        uri = f"/v2/jobs/search/{job_id}/schedule"
+        uri = f"/v2/jobs/{job_id}"
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.get(url=url, **kwargs)
         results.raise_for_status()
-        return results.json()
+        job = results.json()
+        return job["schedule"]
 
     def update_job_schedule(self, job_id=None, job_schedule=None, **kwargs):
         """
@@ -162,10 +165,10 @@ class Mitto:
         assert isinstance(job_id, int)
         assert isinstance(job_schedule, dict)
 
-        uri = f"/v2/jobs/{job_id}/schedule"
+        uri = f"/v2/jobs/{job_id}"
         url = f"{self.base_url}{self.api_root}{uri}"
 
-        results = self.session.post(url=url, json=job_schedule, **kwargs)
+        results = self.session.patch(url=url, json=job_schedule, **kwargs)
         results.raise_for_status()
         return results.json()
 
@@ -180,21 +183,20 @@ class Mitto:
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.patch(url, json=update_job_body, **kwargs)
-        # results.raise_for_status()
+        results.raise_for_status()
         return results.json()
 
     def update_job_conf(self, job_id, job_conf, **kwargs):
         """
         Update an existing Mitto job conf.
         """
-        assert isinstance(job_conf, dict)
         assert isinstance(job_id, int)
 
         uri = f"/v2/jobs/{job_id}"
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.patch(url, json=job_conf, **kwargs)
-        # results.raise_for_status()
+        results.raise_for_status()
         return results.json()
 
     def create_job_webhook(self, job_id=None, job_hook=None, **kwargs):
@@ -224,13 +226,12 @@ class Mitto:
         results.raise_for_status()
         return results.json()
 
-    def get_tags(self, tags_id=None, **kwargs):
+    def get_tags(self, **kwargs):
         """
         Get info about tags of job, if it exists.
         """
-        assert isinstance(tags_id, int)
 
-        uri = f"/tags/{tags_id}"
+        uri = "/tags"
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.get(url=url, **kwargs)
@@ -334,7 +335,7 @@ class Mitto:
         """
         Create a new Mitto job.
         """
-        assert isinstance(bulk_job, dict)
+        assert isinstance(bulk_job, list)
 
         uri = "/v2/bulk/jobs"
         url = f"{self.base_url}{self.api_root}{uri}"
@@ -352,6 +353,7 @@ class Mitto:
         url = f"{self.base_url}{self.api_root}{uri}"
 
         results = self.session.post(url, json=tags, **kwargs)
+        results.raise_for_status()
         return results.json()
 
     def get_credentials(self, **kwargs):

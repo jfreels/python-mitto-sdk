@@ -1,8 +1,12 @@
+"""
+Updating an existing job credentials in Mitto instance.
+"""
 import os
 import sys
 
 from dotenv import load_dotenv
 from mitto_sdk import Mitto
+# from create_credentials import main as create_credentials
 
 load_dotenv()
 
@@ -11,10 +15,11 @@ API_KEY = os.getenv("MITTO_API_KEY")
 
 JOB_TYPE = "io"
 INPUT_USE = "sfdc.iov2#SalesforceInput"
-INPUT_CREDENTIALS = "Salesforse - aziz.abibulaiev@zuar.com"
+INPUT_CREDS = "Salesforse - aziz.abibulaiev@zuar.com"
 
 
-def main():
+def main(BASE_URL, API_KEY, INPUT_CREDS):
+    """updating job credentials"""
     mitto = Mitto(
         base_url=BASE_URL,
         api_key=API_KEY
@@ -27,7 +32,7 @@ def main():
 
         # update conf
         if conf.get("input") and conf.get("input").get("use") == INPUT_USE:
-            conf["input"]["credentials"] = str(INPUT_CREDENTIALS)
+            conf["input"]["credentials"] = str(INPUT_CREDS)
             job["conf"] = conf
             update_crd = mitto.update_job_conf(job_id=job["id"], job_conf=job)
             print(update_crd)
@@ -37,4 +42,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(BASE_URL, API_KEY, INPUT_CREDS))

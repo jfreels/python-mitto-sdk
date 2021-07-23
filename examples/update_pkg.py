@@ -1,3 +1,6 @@
+"""
+Updating info about packages in Mitto instances.
+"""
 import os
 import sys
 
@@ -10,15 +13,15 @@ BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
 
 
-def main():
+def main(BASE_URL, API_KEY):
+    """updating pkg"""
     mitto = Mitto(
         base_url=BASE_URL,
         api_key=API_KEY
     )
     pkg = mitto.update_pkg()
-    for packages in pkg:
-        print(pkg["packages"])
+    print(pkg)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(BASE_URL, API_KEY))
