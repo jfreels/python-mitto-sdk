@@ -1,0 +1,10 @@
+{
+  "conf": {
+    "input": {},
+    "output": {
+      "dbo": "postgresql://localhost/analytics",
+      "schema": "salesforce",
+      "tablename": "account",
+      "use": "call:mitto.iov2.db#todb"
+    }
+}

@@ -28,9 +28,10 @@ def main(BASE_URL, API_KEY):
         base_url=BASE_URL,
         api_key=API_KEY
     )
-    job_id = created_job_webhook(WEBHOOK=WEBHOOK)
-    webhook = mitto.get_job_webhooks(job_id=job_id)
-    print(f"Job webhook conf:\n{webhook}")
+    webhook = created_job_webhook(WEBHOOK=WEBHOOK)
+    job_id = webhook["id"]
+    single_webhook = mitto.get_job_webhooks(job_id=job_id)
+    return single_webhook
 
 
 if __name__ == "__main__":

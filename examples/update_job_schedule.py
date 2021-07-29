@@ -33,11 +33,10 @@ def main(BASE_URL, API_KEY, SCHEDULE):
         base_url=BASE_URL,
         api_key=API_KEY
     )
-    sch_id = get_schedule(BASE_URL, API_KEY)
-    job = mitto.get_job_schedule(job_id=sch_id)
-    job_schedule = SCHEDULE
-    job['schedule'] = job_schedule
-    post_schedule = mitto.update_job_schedule(job_id=sch_id, job_schedule=job)
+    get_sch = get_schedule(BASE_URL, API_KEY)
+    sch_id = get_sch["id"]
+    get_sch['schedule'] = SCHEDULE
+    post_schedule = mitto.update_job_schedule(job_id=sch_id, job_schedule=get_sch)  # noqa: E501
     return post_schedule
 
 

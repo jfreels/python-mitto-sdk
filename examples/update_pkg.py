@@ -20,7 +20,7 @@ def main(BASE_URL, API_KEY):
         api_key=API_KEY
     )
     pkg = mitto.update_pkg()
-    print(pkg)
+    return pkg
 
 
 if __name__ == "__main__":

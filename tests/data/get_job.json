@@ -1,0 +1,31 @@
+{
+  "id": 156,
+  "name": "plugin_cmd__new_command_job",
+  "title": "New Command Job",
+  "type": "cmd",
+  "markdown": null,
+  "schedule": null,
+  "timeout": null,
+  "notify": 0,
+  "delay": null,
+  "continue_on_error": false,
+  "concurrency": null,
+  "created_at": "2021-07-29T14:26:46.140424+00:00",
+  "updated_at": "2021-07-29T14:26:46.140411+00:00",
+  "status": {
+    "id": 81,
+    "pid": 8870,
+    "returncode": null,
+    "updates": null,
+    "count": null,
+    "error": null,
+    "started_at": "2021-07-29T14:26:52.158552+00:00",
+    "completed_at": null,
+    "kvp": {}
+  },
+  "tags": [
+    "cmd"
+  ],
+  "conf": "{\n  shell: true\n  cmd: sleep 15\n  exec: false\n  timeout: null\n  cmd_env: {}\n}",
+  "jobs": []
+}

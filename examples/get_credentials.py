@@ -34,8 +34,7 @@ def main(BASE_URL, API_KEY):
     )
     created_creds = created_credentials(NEW_CREDS=NEW_CREDS)  # noqa: F841, E501# pylint: disable=W0612
     creds = mitto.get_credentials()
-    print(f".\n.\n.\n.\n.\nPrinting results of getting credentials\
- from Mitto instance:,\n{creds}")
+    return creds
 
 
 if __name__ == "__main__":

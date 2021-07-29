@@ -65,8 +65,7 @@ def main(WEBHOOK):
     job = created_job(JOB=JOB)
     job_id = job["id"]
     job_webhook = mitto.create_job_webhook(job_id=job_id, job_hook=WEBHOOK)
-    print(job_webhook)
-    return job_id
+    return job_webhook
 
 
 if __name__ == "__main__":

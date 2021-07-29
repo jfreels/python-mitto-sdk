@@ -56,7 +56,7 @@ def main(BASE_URL, API_KEY):
     job_id = job["id"]
     job_schedule = mitto.get_job_schedule(job_id=job_id)
     print(job_schedule)
-    return job_id
+    return job
 
 
 if __name__ == "__main__":

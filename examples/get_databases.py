@@ -20,8 +20,7 @@ def main(BASE_URL, API_KEY):
         api_key=API_KEY
     )
     get_databases = mitto.get_databases()
-    print(f"Printing results of getting databases\
- from Mitto instance:\n{get_databases}")
+    return get_databases
 
 
 if __name__ == "__main__":

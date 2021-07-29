@@ -10,16 +10,6 @@ Python library to interact with Mitto's API.
 pip install python-mitto-sdk
 ```
 
-## Changing path to src for testing python-mitto-sdk package:
-```cmd
-export PYTHONPATH=./src
-```
-
-## Creating .env file with your $MITTO_BASE_URL and $MITTO_API_KEY:
-```cmd
-cd /path/to/your/python-mitto-sdk/examples && echo "MITTO_BASE_URL=https://your-mitto.zuarbase.net">.env && echo "MITTO_API_KEY=<YOUR_API_KEY>">>.env
-```
-
 ## Usage:
 ```python
 # What's my Mitto version?

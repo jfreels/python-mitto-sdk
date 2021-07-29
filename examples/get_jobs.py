@@ -52,11 +52,9 @@ def main(BASE_URL, API_KEY):
         base_url=BASE_URL,
         api_key=API_KEY
     )
-    job = created_job(JOB=JOB)
+    job = created_job(JOB=JOB)  # noqa: F841#pylint: disable=W0612
     jobs = mitto.get_jobs()
-    print("Printing all jobs in mitto instance:\n")
-    for job in jobs:
-        print(job["id"], job["name"])
+    return jobs
 
 
 if __name__ == "__main__":

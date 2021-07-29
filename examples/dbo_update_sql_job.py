@@ -65,7 +65,7 @@ def main(BASE_URL, API_KEY, DBO):
     conf["dbo"] = DBO
     get_job["conf"] = conf
     update_conf_dbo = mitto.update_job_conf(job_id=job_id, job_conf=conf)
-    print(f"Updating job dbo conf: {update_conf_dbo}")
+    return update_conf_dbo
 
 
 if __name__ == "__main__":

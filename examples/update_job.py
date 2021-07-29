@@ -141,7 +141,7 @@ def main(BASE_URL, API_KEY, UPDATE_JOB):
         api_key=API_KEY
     )
     update_job = mitto.update_job(job_id=job_id, update_job_body=UPDATE_JOB)
-    print(f"Updating job dbo conf: {update_job}")
+    return update_job
 
 
 if __name__ == "__main__":

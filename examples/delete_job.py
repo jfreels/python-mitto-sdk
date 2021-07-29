@@ -55,11 +55,11 @@ def main(BASE_URL, API_KEY):
         api_key=API_KEY
     )
     job = created_job(JOB=JOB)
-    print(job)
     job_id = job["id"]
-    jobs = mitto.delete_job(job_id=job_id)
-    print(f'{jobs}\n If you see <Response [204]> message',
+    deleted_job = mitto.delete_job(job_id=job_id)
+    print(f'{deleted_job}\n If you see <Response [204]> message',
           f'job {job_id} succesfuly deleted')
+    return deleted_job
 
 
 if __name__ == "__main__":

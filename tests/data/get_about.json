@@ -1,0 +1,53 @@
+{
+  "version": "string",
+  "database_version": "string",
+  "timezone": {
+    "name": "string",
+    "offset": "string",
+    "olsen": "string"
+  },
+  "messages": {},
+  "system": {
+    "additionalProp1": "string",
+    "additionalProp2": "string",
+    "additionalProp3": "string"
+  },
+  "sysinfo": {
+    "cpus": {
+      "physical": 0,
+      "logical": 0
+    },
+    "memory": {
+      "total": 0,
+      "display": "string"
+    },
+    "swap": {
+      "total": 0,
+      "used": 0
+    },
+    "partitions": [
+      {
+        "device": "string",
+        "mount_point": "string",
+        "total": 0,
+        "used": 0,
+        "free": 0,
+        "percent_used": 0
+      }
+    ]
+  },
+  "tags": [
+    {}
+  ],
+  "pkginfo": {
+    "packages": [
+      {
+        "name": "string",
+        "description": "string",
+        "installed": "string",
+        "available": "string"
+      }
+    ],
+    "timestamp": "string"
+  }
+}

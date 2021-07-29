@@ -1,0 +1,18 @@
+{
+  "id": 0,
+  "name": "string",
+  "title": "string",
+  "type": "string",
+  "markdown": "string",
+  "schedule": {
+    "type": "daily",
+    "daily": {
+      "minute": 0,
+      "hour": 12,
+      "ampm": "AM"
+    },
+    "hourly": {
+      "minute": 0
+    }
+  }
+}

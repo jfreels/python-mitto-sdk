@@ -30,12 +30,12 @@ def main(BASE_URL, API_KEY):
         base_url=BASE_URL,
         api_key=API_KEY
     )
-    webhook = created_webhook(WEBHOOK=WEBHOOK)
-    print(webhook)
+    webhook = created_webhook(WEBHOOK)
     webhook_id = webhook["id"]
-    webhook = mitto.delete_webhook(webhook_id=webhook_id)
+    deleted_webhook = mitto.delete_webhook(webhook_id=webhook_id)
     print(f'{webhook}\n If you see Response[204]',
           f'message webhook {webhook_id} succesfuly deleted')
+    return deleted_webhook
 
 
 if __name__ == "__main__":
