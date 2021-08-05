@@ -31,7 +31,7 @@ SQL_JOB = {
 }
 
 
-def main():
+def main(SQL_JOB):
     """
     Request to API with current configurations.
     """
@@ -45,4 +45,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(SQL_JOB))

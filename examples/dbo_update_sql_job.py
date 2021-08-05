@@ -4,9 +4,10 @@ Updating dbo configuration on existing sql job in Mitto instance.
 import os
 import sys
 import uuid
+import hjson
 
 from dotenv import load_dotenv
-from create_job import main as created_job
+from create_sql_job import main as created_job
 from mitto_sdk import Mitto
 
 load_dotenv()
@@ -57,13 +58,11 @@ def main(BASE_URL, API_KEY, DBO):
          base_url=BASE_URL,
          api_key=API_KEY
     )
-    job = created_job(JOB=JOB)
-    print(job)
+    job = created_job(SQL_JOB=JOB)
     job_id = job["id"]
-    get_job = mitto.get_job(job_id=job_id)
-    conf = get_job["conf"]
+    conf = hjson.loads(job["conf"])
     conf["dbo"] = DBO
-    get_job["conf"] = conf
+    job["conf"] = conf
     update_conf_dbo = mitto.update_job_conf(job_id=job_id, job_conf=conf)
     return update_conf_dbo
 

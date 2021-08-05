@@ -1,7 +1,17 @@
 [
   {
-    "name": "string",
-    "size": 0,
-    "size_hr": "string"
+    "name": "postgres",
+    "size": 7789703,
+    "size_hr": "7607 kB"
+  },
+  {
+    "name": "mitto",
+    "size": 9706631,
+    "size_hr": "9479 kB"
+  },
+  {
+    "name": "analytics",
+    "size": 7789703,
+    "size_hr": "7607 kB"
   }
 ]

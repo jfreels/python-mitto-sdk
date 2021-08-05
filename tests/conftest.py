@@ -1,179 +1,243 @@
 import os
-import shutil
-
-from pathlib import Path
+import json
 import pytest
 
 
 @pytest.fixture(scope="session")
-def test_bulk_job():
-    path = os.path.join(os.path.dirname(__file__), "data", "create_bulk_job.json")  # noqa: E501
-    return os.path.abspath(path)
+def test_bulk_job_fixture():
+    path = os.path.join(os.path.dirname(__file__), "data", "bulk_job.json")  # noqa: E501
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_create_cmd_job():
-    path = os.path.join(os.path.dirname(__file__), "data", "create_cmd_job.json")  # noqa: E501
-    return os.path.abspath(path)
+def test_cmd_job_fixture():
+    path = os.path.join(os.path.dirname(__file__), "data", "cmd_job.json")  # noqa: E501
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_create_credentials():
-    path = os.path.join(os.path.dirname(__file__), "data", "create_credentials.json")  # noqa: E501
-    return os.path.abspath(path)
+def test_credentials_fixture():
+    path = os.path.join(os.path.dirname(__file__), "data", "credentials.json")  # noqa: E501
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_create_job():
-    path = os.path.join(os.path.dirname(__file__), "data", "create_job.json")
-    return os.path.abspath(path)
+def test_io_job_fixture():
+    path = os.path.join(os.path.dirname(__file__), "data", "io_job.json")
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_create_job_webhook(test_create_job):
+def test_create_job_webhook_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "create_job_webhook.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
 def test_sql_job_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "sql_job.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_create_tag():
-    path = os.path.join(os.path.dirname(__file__), "data", "create_tag.json")
-    return os.path.abspath(path)
+def test_tag_fixture():
+    path = os.path.join(os.path.dirname(__file__), "data", "tag.json")
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_about():
+def test_get_about_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "get_about.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_about_messages():
+def test_get_about_messages_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "get_about_messages.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_conf_info(test_create_job):
+def test_get_conf_info_fixture(test_io_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "get_conf_info.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_credentials(test_create_credentials):
+def test_get_credentials_fixture(test_credentials_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "get_credentials.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_databases():
+def test_get_databases_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "get_databases.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_job_by_name(test_create_bulk_job):
+def test_get_job_by_name_fixture(test_bulk_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "get_job_by_name.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_job(test_create_job):
+def test_get_job_schedule_fixture(test_io_job_fixture):
+    path = os.path.join(os.path.dirname(__file__), "data", "get_job_schedule.json")  # noqa: E501
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
+
+
+@pytest.fixture(scope="session")
+def test_get_job_fixture(test_io_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "get_job.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_jobs(test_create_job):
+def test_get_jobs_fixture(test_io_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "get_jobs.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_metrics():
+def test_get_metrics_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "get_metrics.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_pkg():
+def test_get_pkg_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "get_pkg.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_single_job_status(test_create_job, test_start_job):
+def test_get_single_job_status_fixture(test_io_job_fixture, test_start_job_fixture):  # noqa: E501
     path = os.path.join(os.path.dirname(__file__), "data", "get_single_job_status.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_single_job_webhook_conf_info(test_create_job_webhook):
+def test_get_single_job_webhook_conf_info_fixture(test_create_job_webhook_fixture):  # noqa: E501
     path = os.path.join(os.path.dirname(__file__), "data", "get_single_job_webhook_conf_info.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_tags():
+def test_get_tags_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "get_tags.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_get_webhooks(test_create_job_webhook):
+def test_get_webhooks_fixture(test_create_job_webhook_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "get_webhooks.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_start_job(test_create_job):
+def test_start_job_fixture(test_io_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "start_job.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_update_job_credentials(test_create_job):
+def test_update_job_credentials_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "update_job_credentials.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_update_job(test_create_job):
+def test_update_job_fixture(test_io_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "update_job.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_update_job_schedule(test_get_job_schedule):
+def test_update_job_schedule_fixture(test_io_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "update_job_schedule.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_update_pkg():
+def test_update_pkg_fixture():
     path = os.path.join(os.path.dirname(__file__), "data", "update_pkg.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_delete_job(test_create_job):
+def test_delete_job_fixture(test_io_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "delete_job.json")
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_delete_job_webhook(test_create_job, test_create_job_webhook):
-    path = os.path.join(os.path.dirname(__file__), "data", "delete_job_webhook.json")  # noqa: E501
-    return os.path.abspath(path)
+def test_delete_job_webhook_fixture(test_io_job_fixture, test_create_job_webhook_fixture):  # noqa: E501
+    path = os.path.join(os.path.dirname(__file__), "data", "delete_webhook.json")  # noqa: E501
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
 
 
 @pytest.fixture(scope="session")
-def test_dbo_update_sql_job(test_create_sql_job):
+def test_dbo_update_sql_job_fixture(test_sql_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "dbo_update_sql_job.json")  # noqa: E501
-    return os.path.abspath(path)
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data

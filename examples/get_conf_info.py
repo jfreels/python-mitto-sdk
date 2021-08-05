@@ -44,7 +44,7 @@ JOB = {
 }
 
 
-def main():
+def main(BASE_URL, API_KEY):
     """show matching jobs"""
     mitto = Mitto(
         base_url=BASE_URL,
@@ -58,4 +58,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(BASE_URL, API_KEY))

@@ -1,11 +1,11 @@
 {
-  "url": "string",
+  "url": "https://webhook.site/83d6607a-0118-478d-a68c-cf2ab4645314",
   "method": "POST",
-  "event_type": "JOB_START",
+  "event_type": "JOB_COMPLETE",
   "content_type": "application/json",
-  "body": "string",
+  "body": "{ \"text\": \"hello world\" }",
   "enabled": true,
-  "id": 0,
-  "created_at": "2021-07-29T14:38:56.777Z",
-  "updated_at": "2021-07-29T14:38:56.777Z"
+  "id": 19,
+  "created_at": "2021-07-27T13:14:15.866975+00:00",
+  "updated_at": "2021-07-28T00:10:45.545259+00:00"
 }
