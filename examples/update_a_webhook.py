@@ -9,8 +9,8 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
-OLD_WEBHOOK = "https://old-webhook.com"  # noqa: E501
-WEBHOOK = "https://webhook.com"  # noqa: E501
+OLD_WEBHOOK = "https://old-hook.com"  # noqa: E501
+WEBHOOK = "https://new_hook.com"  # noqa: E501
 
 
 def main(BASE_URL, API_KEY, WEBHOOK):
@@ -21,6 +21,7 @@ def main(BASE_URL, API_KEY, WEBHOOK):
         base_url=BASE_URL,
         api_key=API_KEY
     )
+    update_webhook_list = []
     webhooks = mitto.get_webhooks()
     for n in webhooks:
         webhook = n
@@ -30,8 +31,8 @@ def main(BASE_URL, API_KEY, WEBHOOK):
             webhook_url = WEBHOOK
             webhook["url"] = webhook_url
             update_webhook = mitto.update_a_webhook(webhook_id=webhook_id, webhook=webhook)  # noqa: E501
-            print(update_webhook)
-    return update_webhook
+            update_webhook_list.append(update_webhook)
+    return update_webhook_list
 
 
 if __name__ == "__main__":
