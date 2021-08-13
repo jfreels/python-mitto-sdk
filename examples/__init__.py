@@ -32,5 +32,4 @@ from . import (  # noqa: F401
     update_job_credentials,
     update_job_schedule,
     update_pkg,
-    update_a_webhook,
 )

@@ -389,18 +389,3 @@ class Mitto:
         results = self.session.get(url)
         results.raise_for_status()
         return results.json()
-
-    def update_a_webhook(self, webhook_id, webhook, **kwargs):
-        """
-        Update a webhook.
-        """
-
-        assert isinstance(webhook_id, int)
-        assert isinstance(webhook, dict)
-
-        uri = f"/webhooks/{webhook_id}"
-        url = f"{self.base_url}{self.api_root}{uri}"
-
-        results = self.session.put(url, json=webhook, **kwargs)
-        results.raise_for_status()
-        return results.json()

@@ -241,11 +241,3 @@ def test_dbo_update_sql_job_fixture(test_sql_job_fixture):
     f = open(f'{path}', 'r')
     data = json.load(f)
     return data
-
-
-@pytest.fixture(scope="session")
-def test_update_a_webhook_fixture(test_get_webhooks_fixture):
-    path = os.path.join(os.path.dirname(__file__), "data", "update_a_webhook.json")  # noqa: E501
-    f = open(f'{path}', 'r')
-    data = json.load(f)
-    return data

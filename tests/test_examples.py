@@ -267,11 +267,3 @@ def test_delete_webhook(mocker, test_delete_job_webhook_fixture, test_io_job_fix
     mocker.patch("requests.Session.post", new=mock_response(test_create_job_webhook_fixture))  # noqa: E501
     mocker.patch("requests.Session.delete", new=_request_delete())  # noqa: E501
     assert examples.delete_webhook.main(BASE_URL=BASE_URL, API_KEY=API_KEY) == test_delete_job_webhook_fixture  # noqa: E501
-
-
-def test_update_a_webhook(mocker, test_get_webhooks_fixture, test_update_a_webhook_fixture):  # noqa: E501
-    """testing update_a_webhook.py"""
-    mocker.patch("requests.Session.get", new=mock_response(test_get_webhooks_fixture))  # noqa: E501
-    mocker.patch("requests.Session.put", new=mock_response(test_update_a_webhook_fixture))  # noqa: E501
-    WEBHOOK = "https://fakehook.com"
-    assert examples.update_a_webhook.main(BASE_URL=BASE_URL, API_KEY=API_KEY, WEBHOOK=WEBHOOK) == test_update_a_webhook_fixture  # noqa: E501

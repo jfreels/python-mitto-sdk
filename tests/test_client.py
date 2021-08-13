@@ -558,20 +558,3 @@ def test_get_databases(mocker):
         "size_hr": "1000 kB"
     }
     assert mitto.get_databases() == expected_results
-
-
-UPDATE_WEBHOOK_RESPONSE = {
-    "url": "https://webhook.site/83d6607a-0118-478d-a68c-cf2ab4645314"
-}
-
-
-def test_update_a_webhook(mocker):
-    mocker.patch("requests.Session.put", new=mock_response(UPDATE_WEBHOOK_RESPONSE))  # noqa: E501
-    mitto = Mitto(
-        base_url="https://fake.zuarbase.net",
-        api_key="FAKE_API_KEY"
-    )
-    webhook = {
-        "url": "https://webhook.site/83d6607a-0118-478d-a68c-cf2ab4645314"
-    }
-    assert mitto.update_a_webhook(webhook_id=1, webhook=webhook) == UPDATE_WEBHOOK_RESPONSE  # noqa: E501
