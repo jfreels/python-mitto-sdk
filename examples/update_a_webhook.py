@@ -9,8 +9,8 @@ load_dotenv()
 
 BASE_URL = os.getenv("MITTO_BASE_URL")
 API_KEY = os.getenv("MITTO_API_KEY")
-OLD_WEBHOOK = "https://old-hook.com"  # noqa: E501
-WEBHOOK = "https://new_hook.com"  # noqa: E501
+OLD_WEBHOOK = "https://oldhook.com"  # noqa: E501
+WEBHOOK = "https://fakehook.com"  # noqa: E501
 
 
 def main(BASE_URL, API_KEY, WEBHOOK):

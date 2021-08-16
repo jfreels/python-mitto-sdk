@@ -264,7 +264,7 @@
     "updated_at": "2021-07-28T00:10:56.307021+00:00"
   },
   {
-    "url": "https://webhook.site/83d6607a-0118-478d-a68c-cf2ab4645314",
+    "url": "https://hooks.slack.com/services/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",
     "method": "POST",
     "event_type": "JOB_FAILURE",
     "content_type": "application/json",
