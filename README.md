@@ -27,3 +27,15 @@ about = mitto.get_about()
 version = about["version"]
 print(version)
 ```
+## dev notes
+## Creating .env file with your $MITTO_BASE_URL and $MITTO_API_KEY:
+cd /path/to/your/python-mitto-sdk/examples && echo "MITTO_BASE_URL=https://your-mitto.zuarbase.net">.env && echo "MITTO_API_KEY=<YOUR_API_KEY>">>.env
+
+# activate .env 
+create .env
+make pyenv
+source pyenv/bin/activate
+
+## Changing path to examples dir for testing python-mitto-sdk package:
+export PYTHONPATH=../../python-mitto-sdk/examples/
+

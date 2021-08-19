@@ -1,5 +1,5 @@
 # include .env variables
-PACKAGE := src
+PACKAGE := mitto_sdk
 EXAMPLES := examples
 include .env
 export

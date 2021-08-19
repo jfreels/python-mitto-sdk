@@ -1,9 +1,44 @@
 """Test of all scripts at examples directory"""  # noqa: E901
-from addict import Dict  # noqa: E402
-from collections import OrderedDict  # noqa: F401# pylint: disable=W0611, C0411
-
 import examples
 import json  # noqa: F401# pylint: disable=W0611, C0411
+
+from examples import (  # noqa: F401
+    create_bulk_job,
+    create_cmd_job,
+    create_credentials,
+    create_job,
+    create_jobs_from_template,
+    create_job_webhook,
+    create_sql_job,
+    create_tag,
+    dbo_update_sql_job,
+    delete_job,
+    delete_webhook,
+    get_about,
+    get_about_messages,
+    get_conf_info,
+    get_credentials,
+    get_databases,
+    get_job_by_name,
+    get_jobs,
+    get_job_schedule,
+    get_metrics,
+    get_pkg,
+    get_single_job,
+    get_single_job_status,
+    get_single_job_webhook_conf_info,
+    get_tags,
+    get_webhooks,
+    start_job,
+    update_job,
+    update_job_credentials,
+    update_job_schedule,
+    update_pkg,
+    update_a_webhook
+)
+
+from addict import Dict  # noqa: E402
+from collections import OrderedDict  # noqa: F401# pylint: disable=W0611, C0411
 
 BASE_URL = "https://fake.zuarbase.net"
 API_KEY = "FAKE_API_KEY"
@@ -187,7 +222,7 @@ def test_update_job_credentials(mocker, test_update_job_credentials_fixture, tes
 def test_update_job(mocker, test_update_job_fixture):
     """testing update_job.py"""
     mocker.patch("requests.Session.patch", new=mock_response(test_update_job_fixture))  # noqa: E501
-    update_job = {
+    updated_job = {
         "title": "sql",
         "type": "sql",
         "markdown": "string",
@@ -215,7 +250,7 @@ def test_update_job(mocker, test_update_job_fixture):
             "string"
         ]
     }
-    assert examples.update_job.main(BASE_URL=BASE_URL, API_KEY=API_KEY, UPDATE_JOB=update_job) == test_update_job_fixture  # noqa: E501
+    assert examples.update_job.main(BASE_URL=BASE_URL, API_KEY=API_KEY, UPDATE_JOB=updated_job) == test_update_job_fixture  # noqa: E501
 
 
 def test_update_job_schedule(mocker, test_update_job_schedule_fixture):

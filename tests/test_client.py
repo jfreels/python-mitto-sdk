@@ -2,7 +2,7 @@
 import requests
 
 from addict import Dict
-from src.mitto_sdk import Mitto
+from mitto_sdk import Mitto
 
 
 mitto = Mitto(
