@@ -13,7 +13,7 @@ OLD_WEBHOOK = "https://oldhook.com"  # noqa: E501
 WEBHOOK = "https://fakehook.com"  # noqa: E501
 
 
-def main(BASE_URL, API_KEY, WEBHOOK):
+def main(BASE_URL, API_KEY, WEBHOOK, OLD_WEBHOOK):
     """
     Updating all webhooks in Mitto instance to defined webhook
     """
@@ -36,4 +36,4 @@ def main(BASE_URL, API_KEY, WEBHOOK):
 
 
 if __name__ == "__main__":
-    sys.exit(main(BASE_URL, API_KEY, WEBHOOK))
+    sys.exit(main(BASE_URL, API_KEY, WEBHOOK, OLD_WEBHOOK))

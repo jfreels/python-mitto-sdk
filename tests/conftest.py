@@ -124,6 +124,14 @@ def test_get_job_fixture(test_io_job_fixture):
 
 
 @pytest.fixture(scope="session")
+def test_get_single_job_fixture(test_io_job_fixture):
+    path = os.path.join(os.path.dirname(__file__), "data", "get_job.json")
+    f = open(f'{path}', 'r')
+    data = json.load(f)
+    return data
+
+
+@pytest.fixture(scope="session")
 def test_get_jobs_fixture(test_io_job_fixture):
     path = os.path.join(os.path.dirname(__file__), "data", "get_jobs.json")
     f = open(f'{path}', 'r')

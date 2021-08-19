@@ -1,6 +1,6 @@
 [
   {
-    "url": "https://webhook.site/83d6607a-0118-478d-a68c-cf2ab4645314",
+    "url": "https://oldhook.com",
     "method": "POST",
     "event_type": "JOB_COMPLETE",
     "content_type": "application/json",

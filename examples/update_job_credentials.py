@@ -3,7 +3,6 @@ Updating an existing job credentials in Mitto instance.
 """
 import os
 import sys
-import hjson
 
 from dotenv import load_dotenv
 from mitto_sdk import Mitto
@@ -28,7 +27,6 @@ def main(BASE_URL, API_KEY, INPUT_CREDS):  # pylint: disable=R1710
     for job in jobs:
         job = mitto.get_job(job["id"])
         conf = job["conf"]
-        conf = hjson.loads(conf)
 
         # update conf
         if conf.get("input") and conf.get("input").get("use") == INPUT_USE:
