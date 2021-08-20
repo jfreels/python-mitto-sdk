@@ -1,0 +1,51 @@
+[
+  {
+    "name": "andy-klier",
+    "url": "https://andy-klier.zuarbase.net",
+    "type": "internal",
+    "accessible": true,
+    "apikey": "92cb9a1d997b35e277d7860e5108fa5f",
+    "sshkey": "zuar-do"
+  },
+  {
+    "name": "stage",
+    "url": "https://stage.zuarbase.net",
+    "type": "internal",
+    "accessible": true,
+    "apikey": "78b6271ec965cb61986db6ae8aa6daa2",
+    "sshkey": "zuar-do"
+  },
+  {
+    "name": "aziz-mitto",
+    "url": "https://aziz-mitto.zuarbase.net",
+    "type": "customer",
+    "accessible": true,
+    "apikey": "3e89a0dbf11c20fe225aeb86ff9937c2",
+    "sshkey": "zuar-do-dev"
+  },
+  {
+    "name": "mitto",
+    "url": "https://mitto.zuar.com",
+    "type": "internal",
+    "accessible": true,
+    "apikey": "0feb2159ec603a0ff4759f56a04a6f87",
+    "sshkey": "zuar-do"
+  },
+  {
+    "name": "dev",
+    "url": "https://dev.zuar.com",
+    "type": "internal",
+    "accessible": true,
+    "apikey": "52b093c3f8cc41a8c5f7d1ccfacbf9fa",
+    "sshkey": "zuar-do"
+  },
+  {
+    "name": "logan",
+    "url": "https://logan.zuarbase.net",
+    "type": "internal",
+    "accessible": true,
+    "apikey": "601eb62d183a6a0daaf1c0c5c4346a49",
+    "sshkey": "zuar-do"
+  }
+]
+
